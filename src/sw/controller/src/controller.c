@@ -50,13 +50,16 @@ int main(){
 
 	/* Initialize the GPIO driver */
     int status;
-    status = XGpio_Initialize(&Gpio, XPAR_XGPIO_0_BASEADDR);
+    status = XGpio_Initialize(&Gpio, XPAR_XGPIO_0_BASEADDR + 8);
 
-
-//    Xil_Out32(XPAR_XGPIO_0_BASEADDR, 0xeeeeeeee);
+/*
+    for(int i = 0; i <= 24; ++i) {
+        xil_printf("%08x: %08x\n\r", i, Xil_In32(XPAR_XGPIO_0_BASEADDR + i));
+    } */
+    Xil_Out32(XPAR_XGPIO_0_BASEADDR + 0x0000000c, 0xffffffff);
     int x = 0;
     for(/* int i = 0; i < 100; ++i */;;) {
-        volatile u32 in = Xil_In32(XPAR_XGPIO_0_BASEADDR + 8);
+        volatile u32 in = Xil_In32(XPAR_XGPIO_0_BASEADDR + 0x00000008);
         x += in;
     }
     xil_printf("Input sum: %d\r\n", x);
