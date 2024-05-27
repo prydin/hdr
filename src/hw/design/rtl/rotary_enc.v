@@ -10,12 +10,12 @@ module rotary_enc #(
     input wire ck,                  // Clock pulse
     input wire dt,                  // Data pules
     input wire read_enable,         // Triggers readout and reset of movement register
+    output reg out_valid,           /// Output is valid
     output reg signed [7:0] out     // Number of moves accululated since last readout
     );
 
     reg ck_prev = 0;
     reg signed [7:0] move = 0;
-    reg is_reading = 0;
 
     wire ck_debounced;
     wire dt_debounced;
@@ -43,16 +43,16 @@ module rotary_enc #(
             // Use raw values since the debouncer won't have settled
             ck_prev <= ck; 
             move <= 0;
-        end else if(read_enable && !is_reading)
+        end else if(read_enable && !out_valid)
         begin 
             // Positive flank of read_enable. Copy number of steps moved 
             // since last read to out.
             out <= move;
-            is_reading <= 1;
-        end else if(!read_enable && is_reading) 
+            out_valid <= 1;
+        end else if(!read_enable && out_valid) 
         begin
             // Negative flank of read_enabled encountered
-            is_reading <= 0;
+            out_valid <= 0;
             move <= 0;
         end else if(ck_debounced != ck_prev)
         begin

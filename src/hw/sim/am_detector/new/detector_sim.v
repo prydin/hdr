@@ -92,6 +92,8 @@ module detector_sim();
     
    assign { pio1, pio2, pio3, pio4, pio5, pio6, pio7, pio8, pio9, pio16, pio17, pio18, pio19, pio20 } = signal;
    
+   reg pio27, pio28;
+   
    root root1(
     .clk(clk),
     .pio20(pio20),
@@ -108,7 +110,9 @@ module detector_sim();
     .pio3(pio3),
     .pio2(pio2),
     .pio1(pio1),
-    .pio21(pio21), // ADC clock 
+    .pio21(pio21), // ADC clock
+    .pio27(pio27), // Fq ck
+    .pio28(pio28), // Fq dt 
     .pio48(pio48)  // DAC delta/sigma out
     );
    
@@ -137,6 +141,28 @@ module detector_sim();
           .m_axis_data_tvalid(interference_valid),  // output wire m_axis_data_tvalid
           .m_axis_data_tdata(interference)    // output wire [15 : 0] m_axis_data_tdata
         );
+        
+        
+    // Simulate a user fiddling with the frequency knob
+    initial 
+    begin
+        #1000
+        pio27 <= 0;
+        pio27 <= 0;
+        
+        #3000
+        pio27 <= 1;
+        pio27 <= 1;
+        
+        #3000
+        pio27 <= 0;
+        pio27 <= 0;
+        
+        #3000
+        pio27 <= 1;
+        pio27 <= 1;
+    end
+        
                 
 endmodule
     

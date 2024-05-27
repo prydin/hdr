@@ -85,23 +85,7 @@ module root(
         end
     end
     
-    //   Controls
-    localparam FQ_POLL_FQ = 100; // Poll once every 0.01s
-    localparam FQ_POLL_TICKS = SAMPLE_CLK_FQ / FQ_POLL_FQ;
-    wire [7:0] fq_inc;
-    assign led[0:2] = { fq_inc[7], fq_inc[1], fq_inc[0] };
-    wire fq_valid; 
-    
-    fq_dial #(
-        .FQ_POLL_TICKS(FQ_POLL_TICKS)
-    ) fq_dial (
-        .aclk(sample_clk),
-        .reset(reset),
-        .ck(pio27),
-        .dt(pio28),
-        .fq_inc(fq_inc),
-        .out_valid(fq_valid)); 
-       
+    //   Controls           
     wire signed [13:0] in;
     assign in = { pio1, pio2, pio3, pio4, pio5, pio6, pio7, pio8, pio9, pio16, pio17, pio18, pio19, pio20 };
     wire signed [15:0] baseband;
@@ -112,8 +96,8 @@ module root(
         .aclk(fast_clk),
         .clk_locked(clk_locked), 
         .reset(reset),
-        .fq_change(fq_inc),
-        .fq_change_valid(fq_valid),
+        .fq_ck(pio27),
+        .fq_dt(pio28),
         .phase_inc(),
         .phase_inc_valid(),
         .uart_rx(usb_uart_rxd),

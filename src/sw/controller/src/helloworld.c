@@ -22,8 +22,11 @@
 #include "xil_printf.h"
 #include "xparameters.h"
 
-#define CMD_GET_FQ_INC 0x00000001;
-#define CMD_NO_COMMAND 0x00000001;
+// Commands sent to RTL
+#define CMD_GET_FQ_INC  0x10000000
+#define CMD_NO_COMMAND  0x00000000
+
+#define MAX_FQ          8000000 // 8MHz
 
 volatile u32* gpio1_out = (volatile u32*) XPAR_XGPIO_0_BASEADDR; 
 volatile u32* gpio2_in = (volatile u32*) (XPAR_XGPIO_0_BASEADDR + 8);
@@ -32,17 +35,23 @@ volatile u32* gpio2_in = (volatile u32*) (XPAR_XGPIO_0_BASEADDR + 8);
 s8 get_fq_increment() {
     *gpio1_out = CMD_GET_FQ_INC;
     usleep(10);
+    *gpio1_out = CMD_NO_COMMAND;
     return *gpio2_in;
 }
-
 
 int main()
 {
     init_platform();
 
+    u32 fq = 3000000; // TODO: Probably should store this somewhere non-volatile
     for(;;) {
         s8 fq_inc = get_fq_increment();
-        xil_printf("FQ Inc: %02x\n\r", fq_inc);
+        if(fq > 0 && fq < MAX_FQ) {
+            fq += fq_inc;
+        }
+        if(fq_inc != 0) {
+            xil_printf("Fq: %d", fq);
+        }
     }
 
   

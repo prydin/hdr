@@ -45,26 +45,33 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
         input wire aclk,
         input wire clk_locked,
         input wire reset,
-        input wire signed [7:0] fq_change,
-        output wire fq_read_enable,
+        input wire fq_ck,
+        input wire fq_dt,
         output wire [PHASE_INC_WIDTH - 1:0] phase_inc,
         output wire phase_inc_valid,
         input wire uart_rx,
         output wire uart_tx
     );
     
-    // MCU message types 
-    localparam FQ_CHANGE = 3'h0;    // Update frequency
+    wire [31:0] phase_inc_comp;
+    assign phase_inc = phase_inc_comp[PHASE_INC_WIDTH - 1:1];
+    assign phase_inc_valid = phase_inc_comp[0];
+    reg fq_read_enable = 0;
    
-    wire [3:0] irqs;                 // NSC interrupt pins
-   
-    // Generate interrupt pulse from fq_change_valid input
-    monostable_ff fq_irq_ff (
+    
+    // Frequency dial
+    wire fq_valid;
+    wire signed [7:0] fq_change; 
+    rotary_enc fq_dial (
         .aclk(aclk),
         .reset(reset),
-        .d(fq_change_valid),
-        .q(irqs[0]));
-        
+        .ck(fq_ck),
+        .dt(fq_dt),
+        .read_enable(fq_read_enable),
+        .out(fq_change),
+        .out_valid(fq_valid)
+    );
+
     // Handle phase increment output
     wire [31:0] phase_inc_comp;
     assign phase_inc = phase_inc_comp[PHASE_INC_WIDTH - 1:1];
@@ -74,23 +81,6 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
         .reset(reset),
         .d(phase_inc_comp[0]),
         .q(phase_inc_valid));
-    /*
-    microblaze_mcs_0 cpu (
-      .Clk(aclk),                               // input wire Clk
-      .Reset(reset),                            // input wire Reset
-      .INTC_IRQ(),                              // output wire INTC_IRQ
-      .INTC_Interrupt(irqs),                    // input wire [3 : 0] INTC_Interrupt
-      .UART_rxd(uart_rx),                       // input wire UART_rxd
-      .UART_txd(uart_tx),                       // output wire UART_txd
-      .GPIO1_tri_i({{24{1'b0}}, fq_change}),    // Frequency change
-      .GPIO1_tri_o(phase_inc_comp),             // DDS phase increment output, including strobe bit
-      .GPIO2_tri_i(0),                          // input wire [31 : 0] GPIO2_tri_i
-      .GPIO2_tri_o(),                           // output wire [31 : 0] GPIO2_tri_o
-      .GPIO3_tri_i(0),                          // input wire [31 : 0] GPIO3_tri_i
-      .GPIO3_tri_o(),                           // output wire [31 : 0] GPIO3_tri_o
-      .GPIO4_tri_i(0),                          // input wire [31 : 0] GPIO4_tri_i
-      .GPIO4_tri_o()                            // output wire [31 : 0] GPIO4_tri_o
-        ); */
        
    // Commands from MCU to FPGA
    localparam GET_FQ_INC = 4'h1;                // Get latest frequency increment
@@ -100,9 +90,8 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
     wire [31:0] from_mcu;
     wire [3:0] command_from_mcu = from_mcu[31:28];
     wire [27:0] data_from_mcu = from_mcu[27:0];
-    reg ready = 1; 
+    reg ready = 1;
         
-    //`default_nettype wire
     mcu mcu (
         .aclk(aclk),
         .to_mcu_tri_i(to_mcu),
@@ -110,12 +99,11 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
         .locked(clk_locked),
         .usb_uart_rxd(uart_rx),
         .usb_uart_txd(uart_tx));
-    //`default_nettype none
         
     // Command dispatcher state machine
-    localparam IDLE         = 4'h0;
-    localparam READ         = 4'h1;
-    localparam READ_DONE    = 4'h2;
+    localparam IDLE         = 4'h0;     // Awaiting command
+    localparam READ         = 4'h1;     // Read value
+    localparam LIMBO        = 4'h2;     // Stalled until NO_COMMAND received 
     reg [3:0] state = IDLE;
     always @(posedge aclk or posedge reset)
     begin
@@ -130,19 +118,23 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
                 IDLE:
                     begin
                         fq_read_enable <= 1;
-                        state <= READ_PREP; 
+                        state <= READ; 
                     end
                 READ:
                     begin
-                        to_mcu <= {{24{fq_change[7]}}, fq_change };
-                        fq_read_enable <= 0;
-                        state <= READ_DONE;
+                        if(fq_valid) 
+                        begin
+                            to_mcu <= {{24{fq_change[7]}}, fq_change };
+                            fq_read_enable <= 0;
+                            state <= LIMBO;
+                        end
                     end
+                endcase
             NO_COMMAND:
                 begin
                     state <= IDLE;
                 end
-            endcase 
-        endcase
-    end
+            endcase
+        end
+     end
 endmodule

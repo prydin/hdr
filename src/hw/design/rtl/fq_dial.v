@@ -23,7 +23,7 @@ module fq_dial #(
         .ck(ck),
         .dt(dt),
         .read_enable(read_fq),
-        .out(fq_inc)
+        .out(fq_inc),
     );
     
     reg [$clog2(FQ_POLL_TICKS + 1) - 1:0] fq_poll_counter = FQ_POLL_TICKS -1;
