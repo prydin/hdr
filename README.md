@@ -1,2 +1,2 @@
-# hdr
-Hardware Defined Radio
+# Hardware Defined Radio
+This is currently just a testbed for some of my experiments. Not much to see yet...
