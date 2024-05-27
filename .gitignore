@@ -9,6 +9,7 @@
 **./rigel_lopper/
 **/.theia/
 **/logs/
+**/.cache/
 
 *.log
 *.bak
