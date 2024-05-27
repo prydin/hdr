@@ -46,7 +46,7 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
         input wire clk_locked,
         input wire reset,
         input wire signed [7:0] fq_change,
-        output wire fq_change_valid,
+        output wire fq_read_enable,
         output wire [PHASE_INC_WIDTH - 1:0] phase_inc,
         output wire phase_inc_valid,
         input wire uart_rx,
@@ -96,7 +96,7 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
    localparam GET_FQ_INC = 4'h1;                // Get latest frequency increment
    localparam NO_COMMAND = 4'h0;                // No command -> Get ready for next
    
-    reg [31:0] to_mcu = 32'h42424242; // TODO: Change to 0
+    reg [31:0] to_mcu = 32'h0;
     wire [31:0] from_mcu;
     wire [3:0] command_from_mcu = from_mcu[31:28];
     wire [27:0] data_from_mcu = from_mcu[27:0];
@@ -112,7 +112,11 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
         .usb_uart_txd(uart_tx));
     //`default_nettype none
         
-    // Command dispatcher
+    // Command dispatcher state machine
+    localparam IDLE         = 4'h0;
+    localparam READ         = 4'h1;
+    localparam READ_DONE    = 4'h2;
+    reg [3:0] state = IDLE;
     always @(posedge aclk or posedge reset)
     begin
         if(reset) 
@@ -120,20 +124,25 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
             ready <= 1;
             to_mcu <= 0;
         end else begin 
-            to_mcu <= to_mcu + 1;
             case(command_from_mcu)
             GET_FQ_INC:
-                if(ready)
-                begin
-                    // TODO: Do stuff
-                    to_mcu <= to_mcu + 1;
-                    ready <= 0;
-                end
+                case(state)
+                IDLE:
+                    begin
+                        fq_read_enable <= 1;
+                        state <= READ_PREP; 
+                    end
+                READ:
+                    begin
+                        to_mcu <= {{24{fq_change[7]}}, fq_change };
+                        fq_read_enable <= 0;
+                        state <= READ_DONE;
+                    end
             NO_COMMAND:
                 begin
-                    ready <= 1;
+                    state <= IDLE;
                 end
-            endcase
-        end   
+            endcase 
+        endcase
     end
 endmodule

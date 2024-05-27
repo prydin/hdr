@@ -20,7 +20,7 @@
       "targetSetup": {
         "resetSystem": true,
         "programDevice": true,
-        "bitstreamFile": "${workspaceFolder}\\controller\\_ide\\bitstream\\root.bit",
+        "bitstreamFile": "",
         "downloadElf": [
           {
             "core": "microblaze_0",

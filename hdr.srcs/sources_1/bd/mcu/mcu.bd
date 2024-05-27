@@ -29,8 +29,7 @@
         "lmb_bram": ""
       },
       "rst_clk_wiz_0_100M": "",
-      "xlconstant_0": "",
-      "ila_0": ""
+      "xlconstant_0": ""
     },
     "interface_ports": {
       "from_mcu": {
@@ -781,13 +780,6 @@
         "xci_name": "mcu_xlconstant_0_0",
         "xci_path": "ip\\mcu_xlconstant_0_0\\mcu_xlconstant_0_0.xci",
         "inst_hier_path": "xlconstant_0"
-      },
-      "ila_0": {
-        "vlnv": "xilinx.com:ip:ila:6.2",
-        "ip_revision": "14",
-        "xci_name": "mcu_ila_0_0",
-        "xci_path": "ip\\mcu_ila_0_0\\mcu_ila_0_0.xci",
-        "inst_hier_path": "ila_0"
       }
     },
     "interface_nets": {
@@ -847,12 +839,6 @@
       }
     },
     "nets": {
-      "axi_gpio_0_s_axi_rdata": {
-        "ports": [
-          "axi_gpio_0/s_axi_rdata",
-          "ila_0/probe10"
-        ]
-      },
       "locked_1": {
         "ports": [
           "locked",
@@ -876,8 +862,7 @@
           "microblaze_0_axi_periph/M00_ACLK",
           "microblaze_0_axi_periph/ACLK",
           "axi_uartlite_0/s_axi_aclk",
-          "microblaze_0_axi_periph/M01_ACLK",
-          "ila_0/clk"
+          "microblaze_0_axi_periph/M01_ACLK"
         ]
       },
       "rst_clk_wiz_0_100M_bus_struct_reset": {
@@ -950,7 +935,7 @@
       "file": {
         "name": "..\\..\\..\\..\\src\\sw\\controller\\build\\controller.elf",
         "type": "ELF",
-        "checksum": "1486073749",
+        "checksum": "3873993395",
         "IsVisible": "1",
         "ScopedToRef": "mcu",
         "ScopedToCell": [
@@ -963,7 +948,7 @@
       "file": {
         "name": "..\\..\\..\\..\\src\\sw\\controller\\build\\controller.elf",
         "type": "ELF",
-        "checksum": "1486073749",
+        "checksum": "3873993395",
         "IsVisible": "1",
         "ScopedToRef": "mcu",
         "ScopedToCell": [
