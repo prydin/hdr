@@ -49,6 +49,8 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
         input wire fq_dt,
         output reg [PHASE_INC_WIDTH - 1:0] phase_inc = 8388608, // Start at 1MHz to avoid DDS going bonkers
         output wire phase_inc_valid,
+        inout wire iic_scl,
+        inout wire iic_sda,
         input wire uart_rx,
         output wire uart_tx
     );
@@ -80,11 +82,13 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
     wire [27:0] data_from_mcu = from_mcu[27:0];
     reg ready = 1;
         
-    mcu mcu (
+    mcu_wrapper mcu (
         .aclk(aclk),
         .to_mcu_tri_i(to_mcu),
         .from_mcu_tri_o(from_mcu),
         .locked(clk_locked),
+        .iic_scl_io(iic_scl),
+        .iic_sda_io(iic_sda),
         .usb_uart_rxd(uart_rx),
         .usb_uart_txd(uart_tx));
         

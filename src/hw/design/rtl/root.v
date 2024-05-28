@@ -37,6 +37,8 @@ module root(
     output wire pio26,          // 3.3V for fq dial
     input wire pio27,           // Fq dial ck
     input wire pio28,           // Fq dial dt 
+    inout wire pio29,           // IIC SCL
+    inout wire pio30,           // IIC SDA
     input wire [1:0] btn,       // Button for test
     output wire [0:3] led,      // LEDs for test 
     output wire pio21,          // ADC clock 
@@ -100,6 +102,8 @@ module root(
         .reset(reset),
         .fq_ck(pio27),
         .fq_dt(pio28),
+        .iic_scl(pio29),
+        .iic_sda(pio30),
         .phase_inc(phase_inc),
         .phase_inc_valid(phase_inc_valid),
         .uart_rx(usb_uart_rxd),
