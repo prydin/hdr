@@ -18,9 +18,10 @@ module am_detector (
     wire signed [31:0] dds_config;
     assign dds_config = { 1'b0, 1'b0, 1'b0, 1'b0, 1'b0, phase_inc };
     
+       
     // ************* IF carrier generation *************
     wire carrier_valid;
-    wire [31:0] raw_carrier_iq; 
+    wire [31:0] raw_carrier_iq;
     local_osc local_osc_1 (
         .aclk(aclk),                                // input wire aclk
         .m_axis_data_tvalid(carrier_valid),         // output wire m_axis_data_tvalid

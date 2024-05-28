@@ -15,15 +15,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="30.364519 us"></ZoomStartTime>
-      <ZoomEndTime time="42.352458 us"></ZoomEndTime>
-      <Cursor1Time time="41.000000 us"></Cursor1Time>
+      <ZoomStartTime time="5,652.583 ns"></ZoomStartTime>
+      <ZoomEndTime time="10,489.666 ns"></ZoomEndTime>
+      <Cursor1Time time="9,973.250 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="237"></NameColumnWidth>
-      <ValueColumnWidth column_width="101"></ValueColumnWidth>
+      <ValueColumnWidth column_width="81"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="53" />
+   <WVObjectSize size="12" />
    <wvobject fp_name="/detector_sim/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -50,200 +50,41 @@
       <obj_property name="CellHeight">36</obj_property>
       <obj_property name="isExpanded"></obj_property>
    </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Clk" type="logic">
-      <obj_property name="ElementShortName">Clk</obj_property>
-      <obj_property name="ObjectShortName">Clk</obj_property>
+   <wvobject fp_name="/detector_sim/root1/phase_inc_valid" type="logic">
+      <obj_property name="ElementShortName">phase_inc_valid</obj_property>
+      <obj_property name="ObjectShortName">phase_inc_valid</obj_property>
    </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Instr_Addr" type="array">
-      <obj_property name="ElementShortName">Instr_Addr[0:31]</obj_property>
-      <obj_property name="ObjectShortName">Instr_Addr[0:31]</obj_property>
+   <wvobject fp_name="/detector_sim/root1/phase_inc" type="array">
+      <obj_property name="ElementShortName">phase_inc[26:0]</obj_property>
+      <obj_property name="ObjectShortName">phase_inc[26:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Instr" type="array">
-      <obj_property name="ElementShortName">Instr[0:31]</obj_property>
-      <obj_property name="ObjectShortName">Instr[0:31]</obj_property>
+   <wvobject fp_name="/detector_sim/root1/am_1/carrier_i" type="array">
+      <obj_property name="ElementShortName">carrier_i[15:0]</obj_property>
+      <obj_property name="ObjectShortName">carrier_i[15:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
+      <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
+      <obj_property name="CellHeight">100</obj_property>
    </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/IFetch" type="logic">
-      <obj_property name="ElementShortName">IFetch</obj_property>
-      <obj_property name="ObjectShortName">IFetch</obj_property>
+   <wvobject fp_name="/detector_sim/root1/controller/raw_phase_inc_valid" type="logic">
+      <obj_property name="ElementShortName">raw_phase_inc_valid</obj_property>
+      <obj_property name="ObjectShortName">raw_phase_inc_valid</obj_property>
    </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/I_AS" type="logic">
-      <obj_property name="ElementShortName">I_AS</obj_property>
-      <obj_property name="ObjectShortName">I_AS</obj_property>
+   <wvobject fp_name="/detector_sim/root1/am_1/local_osc_1/s_axis_phase_tdata" type="array">
+      <obj_property name="ElementShortName">s_axis_phase_tdata[31:0]</obj_property>
+      <obj_property name="ObjectShortName">s_axis_phase_tdata[31:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/IReady" type="logic">
-      <obj_property name="ElementShortName">IReady</obj_property>
-      <obj_property name="ObjectShortName">IReady</obj_property>
+   <wvobject fp_name="/detector_sim/root1/am_1/local_osc_1/s_axis_phase_tvalid" type="logic">
+      <obj_property name="ElementShortName">s_axis_phase_tvalid</obj_property>
+      <obj_property name="ObjectShortName">s_axis_phase_tvalid</obj_property>
    </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/IWAIT" type="logic">
-      <obj_property name="ElementShortName">IWAIT</obj_property>
-      <obj_property name="ObjectShortName">IWAIT</obj_property>
+   <wvobject fp_name="/detector_sim/root1/am_1/local_osc_1/aclk" type="logic">
+      <obj_property name="ElementShortName">aclk</obj_property>
+      <obj_property name="ObjectShortName">aclk</obj_property>
    </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/ICE" type="logic">
-      <obj_property name="ElementShortName">ICE</obj_property>
-      <obj_property name="ObjectShortName">ICE</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/IUE" type="logic">
-      <obj_property name="ElementShortName">IUE</obj_property>
-      <obj_property name="ObjectShortName">IUE</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Data_Addr" type="array">
-      <obj_property name="ElementShortName">Data_Addr[0:31]</obj_property>
-      <obj_property name="ObjectShortName">Data_Addr[0:31]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Data_Read" type="array">
-      <obj_property name="ElementShortName">Data_Read[0:31]</obj_property>
-      <obj_property name="ObjectShortName">Data_Read[0:31]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Data_Write" type="array">
-      <obj_property name="ElementShortName">Data_Write[0:31]</obj_property>
-      <obj_property name="ObjectShortName">Data_Write[0:31]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/D_AS" type="logic">
-      <obj_property name="ElementShortName">D_AS</obj_property>
-      <obj_property name="ObjectShortName">D_AS</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Read_Strobe" type="logic">
-      <obj_property name="ElementShortName">Read_Strobe</obj_property>
-      <obj_property name="ObjectShortName">Read_Strobe</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Write_Strobe" type="logic">
-      <obj_property name="ElementShortName">Write_Strobe</obj_property>
-      <obj_property name="ObjectShortName">Write_Strobe</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/DReady" type="logic">
-      <obj_property name="ElementShortName">DReady</obj_property>
-      <obj_property name="ObjectShortName">DReady</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/DWait" type="logic">
-      <obj_property name="ElementShortName">DWait</obj_property>
-      <obj_property name="ObjectShortName">DWait</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/DCE" type="logic">
-      <obj_property name="ElementShortName">DCE</obj_property>
-      <obj_property name="ObjectShortName">DCE</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/DUE" type="logic">
-      <obj_property name="ElementShortName">DUE</obj_property>
-      <obj_property name="ObjectShortName">DUE</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Byte_Enable" type="array">
-      <obj_property name="ElementShortName">Byte_Enable[0:3]</obj_property>
-      <obj_property name="ObjectShortName">Byte_Enable[0:3]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_AWADDR" type="array">
-      <obj_property name="ElementShortName">M_AXI_DP_AWADDR[31:0]</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_AWADDR[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_AWPROT" type="array">
-      <obj_property name="ElementShortName">M_AXI_DP_AWPROT[2:0]</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_AWPROT[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_AWVALID" type="logic">
-      <obj_property name="ElementShortName">M_AXI_DP_AWVALID</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_AWVALID</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_AWREADY" type="logic">
-      <obj_property name="ElementShortName">M_AXI_DP_AWREADY</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_AWREADY</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_WDATA" type="array">
-      <obj_property name="ElementShortName">M_AXI_DP_WDATA[31:0]</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_WDATA[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_WSTRB" type="array">
-      <obj_property name="ElementShortName">M_AXI_DP_WSTRB[3:0]</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_WSTRB[3:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_WVALID" type="logic">
-      <obj_property name="ElementShortName">M_AXI_DP_WVALID</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_WVALID</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_WREADY" type="logic">
-      <obj_property name="ElementShortName">M_AXI_DP_WREADY</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_WREADY</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_BRESP" type="array">
-      <obj_property name="ElementShortName">M_AXI_DP_BRESP[1:0]</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_BRESP[1:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_BVALID" type="logic">
-      <obj_property name="ElementShortName">M_AXI_DP_BVALID</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_BVALID</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_BREADY" type="logic">
-      <obj_property name="ElementShortName">M_AXI_DP_BREADY</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_BREADY</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_ARADDR" type="array">
-      <obj_property name="ElementShortName">M_AXI_DP_ARADDR[31:0]</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_ARADDR[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_ARPROT" type="array">
-      <obj_property name="ElementShortName">M_AXI_DP_ARPROT[2:0]</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_ARPROT[2:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_ARVALID" type="logic">
-      <obj_property name="ElementShortName">M_AXI_DP_ARVALID</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_ARVALID</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_ARREADY" type="logic">
-      <obj_property name="ElementShortName">M_AXI_DP_ARREADY</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_ARREADY</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_RDATA" type="array">
-      <obj_property name="ElementShortName">M_AXI_DP_RDATA[31:0]</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_RDATA[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_RRESP" type="array">
-      <obj_property name="ElementShortName">M_AXI_DP_RRESP[1:0]</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_RRESP[1:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_RVALID" type="logic">
-      <obj_property name="ElementShortName">M_AXI_DP_RVALID</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_RVALID</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP_RREADY" type="logic">
-      <obj_property name="ElementShortName">M_AXI_DP_RREADY</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP_RREADY</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Dbg_Clk" type="logic">
-      <obj_property name="ElementShortName">Dbg_Clk</obj_property>
-      <obj_property name="ObjectShortName">Dbg_Clk</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Dbg_TDI" type="logic">
-      <obj_property name="ElementShortName">Dbg_TDI</obj_property>
-      <obj_property name="ObjectShortName">Dbg_TDI</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Dbg_TDO" type="logic">
-      <obj_property name="ElementShortName">Dbg_TDO</obj_property>
-      <obj_property name="ObjectShortName">Dbg_TDO</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Dbg_Reg_En" type="array">
-      <obj_property name="ElementShortName">Dbg_Reg_En[0:7]</obj_property>
-      <obj_property name="ObjectShortName">Dbg_Reg_En[0:7]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Dbg_Shift" type="logic">
-      <obj_property name="ElementShortName">Dbg_Shift</obj_property>
-      <obj_property name="ObjectShortName">Dbg_Shift</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Dbg_Capture" type="logic">
-      <obj_property name="ElementShortName">Dbg_Capture</obj_property>
-      <obj_property name="ObjectShortName">Dbg_Capture</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Dbg_Update" type="logic">
-      <obj_property name="ElementShortName">Dbg_Update</obj_property>
-      <obj_property name="ObjectShortName">Dbg_Update</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Debug_Rst" type="logic">
-      <obj_property name="ElementShortName">Debug_Rst</obj_property>
-      <obj_property name="ObjectShortName">Debug_Rst</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/Dbg_Disable" type="logic">
-      <obj_property name="ElementShortName">Dbg_Disable</obj_property>
-      <obj_property name="ObjectShortName">Dbg_Disable</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/microblaze_0/M_AXI_DP" type="protoinst">
-      <obj_property name="ElementShortName">M_AXI_DP</obj_property>
-      <obj_property name="ObjectShortName">M_AXI_DP</obj_property>
+   <wvobject fp_name="/detector_sim/root1/phase_inc_valid" type="logic">
+      <obj_property name="ElementShortName">phase_inc_valid</obj_property>
+      <obj_property name="ObjectShortName">phase_inc_valid</obj_property>
    </wvobject>
 </wave_config>

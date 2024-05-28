@@ -88,6 +88,8 @@ module root(
     //   Controls           
     wire signed [13:0] in;
     assign in = { pio1, pio2, pio3, pio4, pio5, pio6, pio7, pio8, pio9, pio16, pio17, pio18, pio19, pio20 };
+    wire [26:0] phase_inc;
+    wire phase_inc_valid;
     wire signed [15:0] baseband;
     wire output_valid;
     
@@ -98,8 +100,8 @@ module root(
         .reset(reset),
         .fq_ck(pio27),
         .fq_dt(pio28),
-        .phase_inc(),
-        .phase_inc_valid(),
+        .phase_inc(phase_inc),
+        .phase_inc_valid(phase_inc_valid),
         .uart_rx(usb_uart_rxd),
         .uart_tx(usb_uart_txd)
     );
@@ -119,8 +121,8 @@ module root(
     
     am_detector am_1 (
         .aclk(sample_clk),
-        .phase_inc(27'd8_388_608), // 1MHz
-        .phase_valid(data_valid), // TODO: Should be separate signal triggered by fq change.
+        .phase_inc(phase_inc),
+        .phase_valid(data_valid), 
         .rf(adc_sample),
         .baseband(baseband),
         .reset(reset),

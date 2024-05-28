@@ -6,7 +6,7 @@ module monostable_ff
     input wire aclk,    // System clock
     input wire reset,   // Master reset
     input wire d,       // Data in
-    output reg q);      // Data out
+    output reg q = 0);  // Data out
     
     reg [$clog2(CYCLES + 1) - 1: 0] counter = CYCLES;
     reg prev = 0;
@@ -47,15 +47,12 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
         input wire reset,
         input wire fq_ck,
         input wire fq_dt,
-        output wire [PHASE_INC_WIDTH - 1:0] phase_inc,
+        output reg [PHASE_INC_WIDTH - 1:0] phase_inc = 8388608, // Start at 1MHz to avoid DDS going bonkers
         output wire phase_inc_valid,
         input wire uart_rx,
         output wire uart_tx
     );
     
-    wire [31:0] phase_inc_comp;
-    assign phase_inc = phase_inc_comp[PHASE_INC_WIDTH - 1:1];
-    assign phase_inc_valid = phase_inc_comp[0];
     reg fq_read_enable = 0;
    
     
@@ -71,20 +68,11 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
         .out(fq_change),
         .out_valid(fq_valid)
     );
-
-    // Handle phase increment output
-    wire [31:0] phase_inc_comp;
-    assign phase_inc = phase_inc_comp[PHASE_INC_WIDTH - 1:1];
-    assign phase_inc_valid = phase_inc_comp[0];
-    monostable_ff phase_inc_ff (
-        .aclk(aclk),
-        .reset(reset),
-        .d(phase_inc_comp[0]),
-        .q(phase_inc_valid));
        
    // Commands from MCU to FPGA
-   localparam GET_FQ_INC = 4'h1;                // Get latest frequency increment
-   localparam NO_COMMAND = 4'h0;                // No command -> Get ready for next
+   localparam GET_FQ_INC    = 4'h1;                 // Get latest frequency increment
+   localparam SET_PHASE_INC = 4'h2;                 // Set phase increment
+   localparam NO_COMMAND    = 4'h0;                 // No command -> Get ready for next
    
     reg [31:0] to_mcu = 32'h0;
     wire [31:0] from_mcu;
@@ -100,10 +88,19 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
         .usb_uart_rxd(uart_rx),
         .usb_uart_txd(uart_tx));
         
+    // Monostable ff to make sure phase_valid is long enough for the
+    // slower clocked DDS to pick up. Keep high for two DDS clock cycles
+    reg raw_phase_inc_valid = 0;
+    monostable_ff #(.CYCLES(256 / 16)) phase_valid_ff(
+        .aclk(aclk),
+        .d(raw_phase_inc_valid),
+        .q(phase_inc_valid));
+        
+        
     // Command dispatcher state machine
     localparam IDLE         = 4'h0;     // Awaiting command
-    localparam READ         = 4'h1;     // Read value
-    localparam LIMBO        = 4'h2;     // Stalled until NO_COMMAND received 
+    localparam EXECUTE      = 4'h1;     // Command is executing
+    localparam LIMBO        = 4'h2;     // Stalled until NO_COMMAND received TODO: Remmove this? 
     reg [3:0] state = IDLE;
     always @(posedge aclk or posedge reset)
     begin
@@ -118,9 +115,9 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
                 IDLE:
                     begin
                         fq_read_enable <= 1;
-                        state <= READ; 
+                        state <= EXECUTE; 
                     end
-                READ:
+                EXECUTE:
                     begin
                         if(fq_valid) 
                         begin
@@ -128,6 +125,20 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
                             fq_read_enable <= 0;
                             state <= LIMBO;
                         end
+                    end
+                endcase
+                SET_PHASE_INC:
+                case(state)
+                IDLE:
+                    begin
+                        phase_inc <= data_from_mcu[PHASE_INC_WIDTH - 1:0];
+                        raw_phase_inc_valid <= 1;
+                        state <= EXECUTE;
+                    end
+                EXECUTE:
+                    begin
+                        raw_phase_inc_valid <= 0;
+                        state <= LIMBO;
                     end
                 endcase
             NO_COMMAND:
