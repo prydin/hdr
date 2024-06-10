@@ -81,17 +81,47 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
     wire [3:0] command_from_mcu = from_mcu[31:28];
     wire [27:0] data_from_mcu = from_mcu[27:0];
     reg ready = 1;
+    
+    
+    wire iic_scl_i;
+    wire iic_scl_o;
+    wire iic_scl_t;
+    wire iic_sda_i;
+    wire iic_sda_o;
+    wire iic_sda_t;
+    
+    // Replicating parts of the wrapper instead of using the wrapper 
+    // itself, as it seems to confuse Vitis.
+  /*  IOBUF iic_scl_iobuf
+       (.I(iic_scl_o),
+        .IO(iic_scl),
+        .O(iic_scl_i),
+        .T(iic_scl_t));
+    IOBUF iic_sda_iobuf
+       (.I(iic_sda_o),
+        .IO(iic_sda),
+        .O(iic_sda_i),
+        .T(iic_sda_t)); */
         
-    mcu_wrapper mcu (
-        .aclk(aclk),
-        .to_mcu_tri_i(to_mcu),
+    assign iic_sda = iic_sda_t ? 1'bz : iic_sda_o;
+    assign iic_sda_i = iic_sda; 
+    assign iic_scl = iic_scl_t ? 1'bz : iic_scl_o;
+    assign iic_scl_i = iic_scl;
+
+    mcu mcu
+        (.aclk(aclk),
         .from_mcu_tri_o(from_mcu),
+        .iic_scl_i(iic_scl_i),
+        .iic_scl_o(iic_scl_o),
+        .iic_scl_t(iic_scl_t),
+        .iic_sda_i(iic_sda_i),
+        .iic_sda_o(iic_sda_o),
+        .iic_sda_t(iic_sda_t),
         .locked(clk_locked),
-        .iic_scl_io(iic_scl),
-        .iic_sda_io(iic_sda),
+        .to_mcu_tri_i(to_mcu),
         .usb_uart_rxd(uart_rx),
         .usb_uart_txd(uart_tx));
-        
+                
     // Monostable ff to make sure phase_valid is long enough for the
     // slower clocked DDS to pick up. Keep high for two DDS clock cycles
     reg raw_phase_inc_valid = 0;

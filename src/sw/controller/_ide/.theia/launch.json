@@ -1,36 +1,36 @@
 {
-  "version": "0.2.0",
-  "configurations": [
-    {
-      "type": "tcf-debug",
-      "request": "launch",
-      "name": "controller_app_hw_1",
-      "debugType": "baremetal-fpga",
-      "attachToRunningTargetOptions": {
-        "targetSetupMode": "standalone",
-        "executeScript": true,
-        "scriptPath": ""
-      },
-      "autoAttachProcessChildren": false,
-      "target": {
-        "targetConnectionId": "Local",
-        "peersIniPath": "../../../.peers.ini",
-        "context": "fpga"
-      },
-      "targetSetup": {
-        "resetSystem": true,
-        "programDevice": true,
-        "bitstreamFile": "",
-        "downloadElf": [
-          {
-            "core": "microblaze_0",
-            "resetProcessor": true,
-            "elfFile": "${workspaceFolder}\\controller\\build\\controller.elf",
-            "stopAtEntry": false
-          }
-        ]
-      },
-      "internalConsoleOptions": "openOnSessionStart"
-    }
-  ]
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"type": "tcf-debug",
+			"request": "launch",
+			"name": "controller_app_hw_1",
+			"debugType": "baremetal-fpga",
+			"attachToRunningTargetOptions": {
+				"targetSetupMode": "standalone",
+				"executeScript": true,
+				"scriptPath": ""
+			},
+			"autoAttachProcessChildren": false,
+			"target": {
+				"targetConnectionId": "Local",
+				"peersIniPath": "../../../.peers.ini",
+				"context": "fpga"
+			},
+			"targetSetup": {
+				"resetSystem": true,
+				"programDevice": true,
+				"bitstreamFile": "C:\\proj\\hdr\\src\\sw\\controller\\_ide\\bitstream\\root.bit",
+				"downloadElf": [
+					{
+						"core": "microblaze_0",
+						"resetProcessor": true,
+						"elfFile": "${workspaceFolder}\\controller\\build\\controller.elf",
+						"stopAtEntry": false
+					}
+				]
+			},
+			"internalConsoleOptions": "openOnSessionStart"
+		}
+	]
 }

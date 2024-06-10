@@ -1,0 +1,14 @@
+Warning: Width correction constrained.  The width correction value must be in the range of [0.000001 mm; 0.199999 mm] for the current design rules.
+Plotted to 'C:\proj\sdr\pcb\adc_fpga\adc_fpga-F_Cu.gbr'.
+Plotted to 'C:\proj\sdr\pcb\adc_fpga\adc_fpga-In1_Cu.gbr'.
+Plotted to 'C:\proj\sdr\pcb\adc_fpga\adc_fpga-In2_Cu.gbr'.
+Plotted to 'C:\proj\sdr\pcb\adc_fpga\adc_fpga-B_Cu.gbr'.
+Plotted to 'C:\proj\sdr\pcb\adc_fpga\adc_fpga-F_Paste.gbr'.
+Plotted to 'C:\proj\sdr\pcb\adc_fpga\adc_fpga-B_Paste.gbr'.
+Plotted to 'C:\proj\sdr\pcb\adc_fpga\adc_fpga-F_Silkscreen.gbr'.
+Plotted to 'C:\proj\sdr\pcb\adc_fpga\adc_fpga-B_Silkscreen.gbr'.
+Plotted to 'C:\proj\sdr\pcb\adc_fpga\adc_fpga-F_Mask.gbr'.
+Plotted to 'C:\proj\sdr\pcb\adc_fpga\adc_fpga-B_Mask.gbr'.
+Plotted to 'C:\proj\sdr\pcb\adc_fpga\adc_fpga-Edge_Cuts.gbr'.
+Created Gerber job file 'C:\proj\sdr\pcb\adc_fpga\adc_fpga-job.gbrjob'.
+Info: Done.

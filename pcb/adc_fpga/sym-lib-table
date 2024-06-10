@@ -1,0 +1,9 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "Custom_Symbols")(type "KiCad")(uri "${KIPRJMOD}/Custom_Symbols.kicad_sym")(options "")(descr ""))
+  (lib (name "2024-04-04_11-56-51")(type "KiCad")(uri "${KIPRJMOD}/symbols/2024-04-04_11-56-51.kicad_sym")(options "")(descr ""))
+  (lib (name "MiniCircuitsBalun")(type "KiCad")(uri "${KIPRJMOD}/symbols/MiniCircuitsBalun.kicad_sym")(options "")(descr ""))
+  (lib (name "ZMR330FTA")(type "KiCad")(uri "${KIPRJMOD}/symbols/ZMR330FTA.kicad_sym")(options "")(descr ""))
+  (lib (name "ASD5423")(type "KiCad")(uri "${KIPRJMOD}/symbols/ASD5423.kicad_sym")(options "")(descr ""))
+  (lib (name "MAX4230AXK")(type "KiCad")(uri "${KIPRJMOD}/symbols/MAX4230AXK.kicad_sym")(options "")(descr ""))
+)

@@ -2,6 +2,7 @@
 #include "platform.h"
 #include "xil_printf.h"
 #include "xparameters.h"
+#include "lcd.h"
 
 // Commands sent to RTL
 #define CMD_GET_FQ_INC      0x10000000
@@ -39,11 +40,29 @@ void set_phase_inc(u32 phase_inc) {
 int main()
 {
     init_platform();
+    xil_printf("Platform init was successful\n\r");
     u32 fq = 3000000; // TODO: Probably should store this somewhere non-volatile
 
     // Let everything start up settle before we kick off the local oscillator
     //usleep(1000);
     set_phase_inc(fq_to_phase_inc(fq));
+
+    LCD lcd;
+    LCD_init(&lcd, get_iic(), 0x27);
+/*    if(XIic_SelfTest(lcd.iic) != XST_SUCCESS) {
+        xil_printf("IIC self test failed\n\r");
+        return XST_FAILURE;
+    } */
+
+    /*
+    for(;;) {
+        int status = LCD_send_single(&lcd, 0xff);
+        usleep(100000);
+       	while (XIic_IsIicBusy(lcd.iic)){}
+        LCD_send_single(&lcd, 0x00);
+        usleep(100000);
+        while (XIic_IsIicBusy(lcd.iic)){}
+      } */
     for(;;) {
         s8 fq_inc = get_fq_increment();
         if(fq > 0 && fq < MAX_FQ) {

@@ -10,7 +10,10 @@
 #include "platform_config.h"
 #endif
 
+#include "xiic.h"
+
 void init_platform();
 void cleanup_platform();
+XIic* get_iic();
 
 #endif

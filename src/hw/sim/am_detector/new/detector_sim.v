@@ -88,7 +88,7 @@ module detector_sim();
         .clk_in1(clk)               // input clk_in1
     );
     
-    wire pio1, pio2, pio3, pio4, pio5, pio6, pio7, pio8, pio9, pio16, pio17, pio18, pio19, pio20, pio21;
+    wire pio1, pio2, pio3, pio4, pio5, pio6, pio7, pio8, pio9, pio16, pio17, pio18, pio19, pio20, pio21, pio29, pio30;
     
    assign { pio1, pio2, pio3, pio4, pio5, pio6, pio7, pio8, pio9, pio16, pio17, pio18, pio19, pio20 } = signal;
    
@@ -113,6 +113,8 @@ module detector_sim();
     .pio21(pio21), // ADC clock
     .pio27(pio27), // Fq ck
     .pio28(pio28), // Fq dt 
+    .pio29(pio29), // SCL
+    .pio30(pio30), // SDA
     .pio48(pio48)  // DAC delta/sigma out
     );
    

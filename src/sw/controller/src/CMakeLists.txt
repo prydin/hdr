@@ -34,10 +34,75 @@ collect(PROJECT_LIB_DEPS xiltimer)
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 collect(PROJECT_LIB_DEPS gcc)
 collect(PROJECT_LIB_DEPS c)
 
 collect (PROJECT_LIB_SOURCES controller.c)
+collect (PROJECT_LIB_SOURCES lcd.c)
 collect (PROJECT_LIB_SOURCES platform.c)
 collector_list (_sources PROJECT_LIB_SOURCES)
 foreach (source ${_sources})

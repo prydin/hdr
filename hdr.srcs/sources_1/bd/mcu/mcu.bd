@@ -20,7 +20,8 @@
         "s00_couplers": {},
         "m00_couplers": {},
         "m01_couplers": {},
-        "m02_couplers": {}
+        "m02_couplers": {},
+        "m03_couplers": {}
       },
       "microblaze_0_local_memory": {
         "dlmb_v10": "",
@@ -31,7 +32,8 @@
       },
       "rst_clk_wiz_0_100M": "",
       "xlconstant_0": "",
-      "axi_iic_0": ""
+      "axi_iic_0": "",
+      "axi_intc_0": ""
     },
     "interface_ports": {
       "from_mcu": {
@@ -280,7 +282,7 @@
         "xci_name": "mcu_microblaze_0_axi_periph_0",
         "parameters": {
           "NUM_MI": {
-            "value": "3"
+            "value": "4"
           }
         },
         "interface_ports": {
@@ -300,6 +302,11 @@
             "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
           },
           "M02_AXI": {
+            "mode": "Master",
+            "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
+            "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
+          },
+          "M03_AXI": {
             "mode": "Master",
             "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
             "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
@@ -382,6 +389,22 @@
           "M02_ARESETN": {
             "type": "rst",
             "direction": "I"
+          },
+          "M03_ACLK": {
+            "type": "clk",
+            "direction": "I",
+            "parameters": {
+              "ASSOCIATED_BUSIF": {
+                "value": "M03_AXI"
+              },
+              "ASSOCIATED_RESET": {
+                "value": "M03_ARESETN"
+              }
+            }
+          },
+          "M03_ARESETN": {
+            "type": "rst",
+            "direction": "I"
           }
         },
         "components": {
@@ -393,7 +416,7 @@
             "inst_hier_path": "microblaze_0_axi_periph/xbar",
             "parameters": {
               "NUM_MI": {
-                "value": "3"
+                "value": "4"
               },
               "NUM_SI": {
                 "value": "1"
@@ -409,7 +432,8 @@
                 "bridges": [
                   "M00_AXI",
                   "M01_AXI",
-                  "M02_AXI"
+                  "M02_AXI",
+                  "M03_AXI"
                 ]
               }
             }
@@ -637,6 +661,62 @@
                 ]
               }
             }
+          },
+          "m03_couplers": {
+            "interface_ports": {
+              "M_AXI": {
+                "mode": "Master",
+                "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
+              },
+              "S_AXI": {
+                "mode": "Slave",
+                "vlnv_bus_definition": "xilinx.com:interface:aximm:1.0",
+                "vlnv": "xilinx.com:interface:aximm_rtl:1.0"
+              }
+            },
+            "ports": {
+              "M_ACLK": {
+                "type": "clk",
+                "direction": "I",
+                "parameters": {
+                  "ASSOCIATED_BUSIF": {
+                    "value": "M_AXI"
+                  },
+                  "ASSOCIATED_RESET": {
+                    "value": "M_ARESETN"
+                  }
+                }
+              },
+              "M_ARESETN": {
+                "type": "rst",
+                "direction": "I"
+              },
+              "S_ACLK": {
+                "type": "clk",
+                "direction": "I",
+                "parameters": {
+                  "ASSOCIATED_BUSIF": {
+                    "value": "S_AXI"
+                  },
+                  "ASSOCIATED_RESET": {
+                    "value": "S_ARESETN"
+                  }
+                }
+              },
+              "S_ARESETN": {
+                "type": "rst",
+                "direction": "I"
+              }
+            },
+            "interface_nets": {
+              "m03_couplers_to_m03_couplers": {
+                "interface_ports": [
+                  "S_AXI",
+                  "M_AXI"
+                ]
+              }
+            }
           }
         },
         "interface_nets": {
@@ -656,6 +736,12 @@
             "interface_ports": [
               "m02_couplers/M_AXI",
               "M02_AXI"
+            ]
+          },
+          "m03_couplers_to_microblaze_0_axi_periph": {
+            "interface_ports": [
+              "m03_couplers/M_AXI",
+              "M03_AXI"
             ]
           },
           "microblaze_0_axi_periph_to_s00_couplers": {
@@ -687,6 +773,12 @@
               "xbar/M02_AXI",
               "m02_couplers/S_AXI"
             ]
+          },
+          "xbar_to_m03_couplers": {
+            "interface_ports": [
+              "xbar/M03_AXI",
+              "m03_couplers/S_AXI"
+            ]
           }
         },
         "nets": {
@@ -699,9 +791,11 @@
               "m00_couplers/M_ACLK",
               "m01_couplers/M_ACLK",
               "m02_couplers/M_ACLK",
+              "m03_couplers/M_ACLK",
               "m00_couplers/S_ACLK",
               "m01_couplers/S_ACLK",
-              "m02_couplers/S_ACLK"
+              "m02_couplers/S_ACLK",
+              "m03_couplers/S_ACLK"
             ]
           },
           "microblaze_0_axi_periph_ARESETN_net": {
@@ -713,9 +807,11 @@
               "m00_couplers/M_ARESETN",
               "m01_couplers/M_ARESETN",
               "m02_couplers/M_ARESETN",
+              "m03_couplers/M_ARESETN",
               "m00_couplers/S_ARESETN",
               "m01_couplers/S_ARESETN",
-              "m02_couplers/S_ARESETN"
+              "m02_couplers/S_ARESETN",
+              "m03_couplers/S_ARESETN"
             ]
           }
         }
@@ -904,7 +1000,27 @@
         "ip_revision": "6",
         "xci_name": "mcu_axi_iic_0_1",
         "xci_path": "ip\\mcu_axi_iic_0_1\\mcu_axi_iic_0_1.xci",
-        "inst_hier_path": "axi_iic_0"
+        "inst_hier_path": "axi_iic_0",
+        "parameters": {
+          "IIC_FREQ_KHZ": {
+            "value": "400"
+          }
+        }
+      },
+      "axi_intc_0": {
+        "vlnv": "xilinx.com:ip:axi_intc:4.1",
+        "ip_revision": "18",
+        "xci_name": "mcu_axi_intc_0_0",
+        "xci_path": "ip\\mcu_axi_intc_0_0\\mcu_axi_intc_0_0.xci",
+        "inst_hier_path": "axi_intc_0",
+        "parameters": {
+          "C_PROCESSOR_CLK_FREQ_MHZ": {
+            "value": "128"
+          },
+          "C_S_AXI_ACLK_FREQ_MHZ": {
+            "value": "128"
+          }
+        }
       }
     },
     "interface_nets": {
@@ -924,6 +1040,12 @@
         "interface_ports": [
           "iic",
           "axi_iic_0/IIC"
+        ]
+      },
+      "axi_intc_0_interrupt": {
+        "interface_ports": [
+          "axi_intc_0/interrupt",
+          "microblaze_0/INTERRUPT"
         ]
       },
       "axi_uartlite_0_UART": {
@@ -956,6 +1078,12 @@
           "axi_iic_0/S_AXI"
         ]
       },
+      "microblaze_0_axi_periph_M03_AXI": {
+        "interface_ports": [
+          "microblaze_0_axi_periph/M03_AXI",
+          "axi_intc_0/s_axi"
+        ]
+      },
       "microblaze_0_debug": {
         "interface_ports": [
           "mdm_1/MBDEBUG_0",
@@ -976,6 +1104,12 @@
       }
     },
     "nets": {
+      "axi_iic_0_iic2intc_irpt": {
+        "ports": [
+          "axi_iic_0/iic2intc_irpt",
+          "axi_intc_0/intr"
+        ]
+      },
       "locked_1": {
         "ports": [
           "locked",
@@ -1001,7 +1135,9 @@
           "axi_uartlite_0/s_axi_aclk",
           "microblaze_0_axi_periph/M01_ACLK",
           "microblaze_0_axi_periph/M02_ACLK",
-          "axi_iic_0/s_axi_aclk"
+          "axi_iic_0/s_axi_aclk",
+          "axi_intc_0/s_axi_aclk",
+          "microblaze_0_axi_periph/M03_ACLK"
         ]
       },
       "rst_clk_wiz_0_100M_bus_struct_reset": {
@@ -1026,7 +1162,9 @@
           "axi_uartlite_0/s_axi_aresetn",
           "microblaze_0_axi_periph/M01_ARESETN",
           "microblaze_0_axi_periph/M02_ARESETN",
-          "axi_iic_0/s_axi_aresetn"
+          "axi_iic_0/s_axi_aresetn",
+          "axi_intc_0/s_axi_aresetn",
+          "microblaze_0_axi_periph/M03_ARESETN"
         ]
       },
       "xlconstant_0_dout": {
@@ -1049,6 +1187,11 @@
               "SEG_axi_iic_0_Reg": {
                 "address_block": "/axi_iic_0/S_AXI/Reg",
                 "offset": "0x40800000",
+                "range": "64K"
+              },
+              "SEG_axi_intc_0_Reg": {
+                "address_block": "/axi_intc_0/S_AXI/Reg",
+                "offset": "0x41200000",
                 "range": "64K"
               },
               "SEG_axi_uartlite_0_Reg": {
@@ -1081,7 +1224,7 @@
       "file": {
         "name": "..\\..\\..\\..\\src\\sw\\controller\\build\\controller.elf",
         "type": "ELF",
-        "checksum": "1019090915",
+        "checksum": "1565791372",
         "IsVisible": "1",
         "ScopedToRef": "mcu",
         "ScopedToCell": [
@@ -1094,7 +1237,7 @@
       "file": {
         "name": "..\\..\\..\\..\\src\\sw\\controller\\build\\controller.elf",
         "type": "ELF",
-        "checksum": "1019090915",
+        "checksum": "1565791372",
         "IsVisible": "1",
         "ScopedToRef": "mcu",
         "ScopedToCell": [
