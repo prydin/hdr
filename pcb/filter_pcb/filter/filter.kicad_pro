@@ -38,8 +38,8 @@
         "other_text_upright": false,
         "pads": {
           "drill": 2.2,
-          "height": 2.2,
-          "width": 2.2
+          "height": 3.8,
+          "width": 3.8
         },
         "silk_line_width": 0.1,
         "silk_text_italic": false,
@@ -576,6 +576,14 @@
       "version": 1
     },
     "net_format_name": "",
+    "ngspice": {
+      "fix_include_paths": true,
+      "meta": {
+        "version": 0
+      },
+      "model_mode": 4,
+      "workbook_filename": ""
+    },
     "page_layout_descr_file": "",
     "plot_directory": "",
     "spice_current_sheet_as_root": false,
@@ -587,6 +595,11 @@
     "subpart_first_id": 65,
     "subpart_id_separator": 0
   },
-  "sheets": [],
+  "sheets": [
+    [
+      "816b9c7a-dde1-46d5-96e5-a392ccbb4253",
+      "Root"
+    ]
+  ],
   "text_variables": {}
 }
