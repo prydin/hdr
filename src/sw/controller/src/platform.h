@@ -15,5 +15,4 @@
 void init_platform();
 void cleanup_platform();
 XIic* get_iic();
-
 #endif

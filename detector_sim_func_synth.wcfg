@@ -16,89 +16,18 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="74,809.619 ns"></ZoomStartTime>
-      <ZoomEndTime time="79,698.877 ns"></ZoomEndTime>
-      <Cursor1Time time="76,978.751 ns"></Cursor1Time>
+      <ZoomStartTime time="32,834.992 ns"></ZoomStartTime>
+      <ZoomEndTime time="37,332.993 ns"></ZoomEndTime>
+      <Cursor1Time time="35,034.992 ns"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="237"></NameColumnWidth>
-      <ValueColumnWidth column_width="69"></ValueColumnWidth>
+      <ValueColumnWidth column_width="65"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="30" />
+   <WVObjectSize size="22" />
    <wvobject fp_name="/detector_sim/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/to_mcu_tri_i" type="array">
-      <obj_property name="ElementShortName">to_mcu_tri_i[31:0]</obj_property>
-      <obj_property name="ObjectShortName">to_mcu_tri_i[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/axi_gpio_0/gpio2_io_i" type="array">
-      <obj_property name="ElementShortName">gpio2_io_i[31:0]</obj_property>
-      <obj_property name="ObjectShortName">gpio2_io_i[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/axi_gpio_0/S_AXI" type="protoinst">
-      <obj_property name="ElementShortName">S_AXI</obj_property>
-      <obj_property name="ObjectShortName">S_AXI</obj_property>
-      <obj_property name="children_use_element_short_name">true</obj_property>
-      <obj_property name="WaveformStyle">STYLE_ENUM_TRANSACTION</obj_property>
-      <obj_property name="EnumTransactionColorTable">0=blank 1=#D399FF 2=pink</obj_property>
-      <obj_property name="EnumTransactionValueTable">0=blank;1=Read;2=Write;3=Read/Write</obj_property>
-      <obj_property name="UseCustomSignalColor">true</obj_property>
-      <obj_property name="CustomSignalColor">turquoise</obj_property>
-      <obj_property name="Render_Data">/detector_sim/root1/controller/mcu/axi_gpio_0/S_AXI.readWriteSummary</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-      <obj_property name="CellHeight">36</obj_property>
-      <obj_property name="isExpanded"></obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/phase_inc_valid" type="logic">
-      <obj_property name="ElementShortName">phase_inc_valid</obj_property>
-      <obj_property name="ObjectShortName">phase_inc_valid</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/phase_inc" type="array">
-      <obj_property name="ElementShortName">phase_inc[26:0]</obj_property>
-      <obj_property name="ObjectShortName">phase_inc[26:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/am_1/carrier_i" type="array">
-      <obj_property name="ElementShortName">carrier_i[15:0]</obj_property>
-      <obj_property name="ObjectShortName">carrier_i[15:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      <obj_property name="WaveformStyle">STYLE_ANALOG</obj_property>
-      <obj_property name="CellHeight">100</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/raw_phase_inc_valid" type="logic">
-      <obj_property name="ElementShortName">raw_phase_inc_valid</obj_property>
-      <obj_property name="ObjectShortName">raw_phase_inc_valid</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/am_1/local_osc_1/s_axis_phase_tdata" type="array">
-      <obj_property name="ElementShortName">s_axis_phase_tdata[31:0]</obj_property>
-      <obj_property name="ObjectShortName">s_axis_phase_tdata[31:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/am_1/local_osc_1/s_axis_phase_tvalid" type="logic">
-      <obj_property name="ElementShortName">s_axis_phase_tvalid</obj_property>
-      <obj_property name="ObjectShortName">s_axis_phase_tvalid</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/am_1/local_osc_1/aclk" type="logic">
-      <obj_property name="ElementShortName">aclk</obj_property>
-      <obj_property name="ObjectShortName">aclk</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/phase_inc_valid" type="logic">
-      <obj_property name="ElementShortName">phase_inc_valid</obj_property>
-      <obj_property name="ObjectShortName">phase_inc_valid</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/pio27" type="logic">
-      <obj_property name="ElementShortName">pio27</obj_property>
-      <obj_property name="ObjectShortName">pio27</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/pio28" type="logic">
-      <obj_property name="ElementShortName">pio28</obj_property>
-      <obj_property name="ObjectShortName">pio28</obj_property>
-   </wvobject>
-   <wvobject fp_name="/detector_sim/root1/controller/mcu/axi_iic_0/s_axi_rdata" type="array">
-      <obj_property name="ElementShortName">s_axi_rdata[31:0]</obj_property>
-      <obj_property name="ObjectShortName">s_axi_rdata[31:0]</obj_property>
    </wvobject>
    <wvobject fp_name="/detector_sim/root1/controller/mcu/axi_iic_0/S_AXI" type="protoinst">
       <obj_property name="children_use_element_short_name">true</obj_property>
@@ -169,5 +98,29 @@
    <wvobject fp_name="/detector_sim/pio30" type="logic">
       <obj_property name="ElementShortName">pio30</obj_property>
       <obj_property name="ObjectShortName">pio30</obj_property>
+   </wvobject>
+   <wvobject fp_name="/detector_sim/root1/controller/iic_scl_t" type="logic">
+      <obj_property name="ElementShortName">iic_scl_t</obj_property>
+      <obj_property name="ObjectShortName">iic_scl_t</obj_property>
+   </wvobject>
+   <wvobject fp_name="/detector_sim/root1/controller/iic_sda_i" type="logic">
+      <obj_property name="ElementShortName">iic_sda_i</obj_property>
+      <obj_property name="ObjectShortName">iic_sda_i</obj_property>
+   </wvobject>
+   <wvobject fp_name="/detector_sim/root1/controller/iic_scl_i" type="logic">
+      <obj_property name="ElementShortName">iic_scl_i</obj_property>
+      <obj_property name="ObjectShortName">iic_scl_i</obj_property>
+   </wvobject>
+   <wvobject fp_name="/detector_sim/root1/controller/iic_scl_o" type="logic">
+      <obj_property name="ElementShortName">iic_scl_o</obj_property>
+      <obj_property name="ObjectShortName">iic_scl_o</obj_property>
+   </wvobject>
+   <wvobject fp_name="/detector_sim/root1/controller/iic_sda_o" type="logic">
+      <obj_property name="ElementShortName">iic_sda_o</obj_property>
+      <obj_property name="ObjectShortName">iic_sda_o</obj_property>
+   </wvobject>
+   <wvobject fp_name="/detector_sim/root1/controller/iic_sda_t" type="logic">
+      <obj_property name="ElementShortName">iic_sda_t</obj_property>
+      <obj_property name="ObjectShortName">iic_sda_t</obj_property>
    </wvobject>
 </wave_config>

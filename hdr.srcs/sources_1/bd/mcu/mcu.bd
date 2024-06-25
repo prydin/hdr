@@ -1002,6 +1002,18 @@
         "xci_path": "ip\\mcu_axi_iic_0_1\\mcu_axi_iic_0_1.xci",
         "inst_hier_path": "axi_iic_0",
         "parameters": {
+          "C_DISABLE_SETUP_VIOLATION_CHECK": {
+            "value": "1"
+          },
+          "C_SCL_INERTIAL_DELAY": {
+            "value": "0"
+          },
+          "C_SDA_INERTIAL_DELAY": {
+            "value": "0"
+          },
+          "C_SDA_LEVEL": {
+            "value": "0"
+          },
           "IIC_FREQ_KHZ": {
             "value": "400"
           }
@@ -1224,7 +1236,7 @@
       "file": {
         "name": "..\\..\\..\\..\\src\\sw\\controller\\build\\controller.elf",
         "type": "ELF",
-        "checksum": "1565791372",
+        "checksum": "3981350378",
         "IsVisible": "1",
         "ScopedToRef": "mcu",
         "ScopedToCell": [
@@ -1237,7 +1249,7 @@
       "file": {
         "name": "..\\..\\..\\..\\src\\sw\\controller\\build\\controller.elf",
         "type": "ELF",
-        "checksum": "1565791372",
+        "checksum": "3981350378",
         "IsVisible": "1",
         "ScopedToRef": "mcu",
         "ScopedToCell": [

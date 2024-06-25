@@ -32,7 +32,7 @@ module monostable_ff
                     if(counter == 0) 
                     begin
                         // Reset time reached
-                        q <= 0;
+                        q <= 0;  
                     end
                 end
             end
@@ -92,21 +92,22 @@ module controller #(parameter PHASE_INC_WIDTH = 27) (
     
     // Replicating parts of the wrapper instead of using the wrapper 
     // itself, as it seems to confuse Vitis.
-  /*  IOBUF iic_scl_iobuf
+    IOBUF iic_scl_iobuf
        (.I(iic_scl_o),
         .IO(iic_scl),
-        .O(iic_scl_i),
+        .O(iic_scl_i),  
         .T(iic_scl_t));
     IOBUF iic_sda_iobuf
        (.I(iic_sda_o),
         .IO(iic_sda),
         .O(iic_sda_i),
-        .T(iic_sda_t)); */
+        .T(iic_sda_t));  
         
-    assign iic_sda = iic_sda_t ? 1'bz : iic_sda_o;
+        /*
+    assign iic_sda = iic_sda_t || iic_sda_o ? 1'bz : 1'b0;
     assign iic_sda_i = iic_sda; 
-    assign iic_scl = iic_scl_t ? 1'bz : iic_scl_o;
-    assign iic_scl_i = iic_scl;
+    assign iic_scl = iic_scl_t || iic_scl_o ? 1'bz : 1'b0;
+    assign iic_scl_i = iic_scl; */
 
     mcu mcu
         (.aclk(aclk),

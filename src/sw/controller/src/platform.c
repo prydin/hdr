@@ -70,7 +70,7 @@ int init_iic() {
     configPtr = XIic_LookupConfig(XPAR_AXI_IIC_0_BASEADDR);
 
     if (configPtr == NULL) {
-        return XST_FAILURE;
+        return XST_FAILURE;    
     }
 
     status = XIic_CfgInitialize(&Iic, configPtr, configPtr->BaseAddress);
@@ -78,7 +78,7 @@ int init_iic() {
         return XST_FAILURE;
     }
 
-    XIic_Start(&Iic);
+    // XIic_Start(&Iic);
     return 0;
 }
 

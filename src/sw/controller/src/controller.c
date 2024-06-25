@@ -1,6 +1,9 @@
 #include <stdio.h>
+#include <xiic.h>
+#include "xiltimer.h"
 #include "platform.h"
 #include "xil_printf.h"
+#include "sleep.h"
 #include "xparameters.h"
 #include "lcd.h"
 
@@ -40,7 +43,7 @@ void set_phase_inc(u32 phase_inc) {
 int main()
 {
     init_platform();
-    xil_printf("Platform init was successful\n\r");
+    xil_printf("Platform init was successful1\n\r");
     u32 fq = 3000000; // TODO: Probably should store this somewhere non-volatile
 
     // Let everything start up settle before we kick off the local oscillator
@@ -48,21 +51,34 @@ int main()
     set_phase_inc(fq_to_phase_inc(fq));
 
     LCD lcd;
-    LCD_init(&lcd, get_iic(), 0x27);
-/*    if(XIic_SelfTest(lcd.iic) != XST_SUCCESS) {
+    LCD_init(&lcd, get_iic(), 0x27, 1);
+    for(;;) {
+        print_string(&lcd, "Hello world!");
+    }
+    /*
+    if(XIic_SelfTest(lcd.iic) != XST_SUCCESS) {
         xil_printf("IIC self test failed\n\r");
         return XST_FAILURE;
     } */
 
     /*
+
+    
     for(;;) {
-        int status = LCD_send_single(&lcd, 0xff);
-        usleep(100000);
-       	while (XIic_IsIicBusy(lcd.iic)){}
-        LCD_send_single(&lcd, 0x00);
-        usleep(100000);
-        while (XIic_IsIicBusy(lcd.iic)){}
-      } */
+        //xil_printf("Sending character\n\r");
+        int status = LCD_send_single(&lcd, 0xaa);
+        XIicStats stats;
+        XIic_GetStats(lcd.iic,  &stats);
+
+        xil_printf("arb lost=%d, txerr:%d, sentbytes: %d, bus busy: %d\n\r", stats.ArbitrationLost, stats.TxErrors, stats.SendBytes, stats.BusBusy);
+//        usleep(100000);
+ //      	while (XIic_IsIicBusy(lcd.iic)){}
+        LCD_send_single(&lcd, 0x55);
+        // xil_printf("Character sent\n\r");
+  //      usleep(100000);
+        // XIic_Reset(lcd.iic);
+  //      while (XIic_IsIicBusy(lcd.iic)){}
+      }  */
     for(;;) {
         s8 fq_inc = get_fq_increment();
         if(fq > 0 && fq < MAX_FQ) {
@@ -73,7 +89,7 @@ int main()
             set_phase_inc(phase_inc);
             xil_printf("Fq: %d, pi: %d\n\r", fq, phase_inc);
         }
-    }
+    } 
 
   
     cleanup_platform();

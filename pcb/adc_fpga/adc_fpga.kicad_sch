@@ -4824,7 +4824,7 @@
 	)
 	(wire
 		(pts
-			(xy 224.79 77.47) (xy 233.68 77.47)
+			(xy 218.44 77.47) (xy 233.68 77.47)
 		)
 		(stroke
 			(width 0)
@@ -4931,16 +4931,6 @@
 			(type default)
 		)
 		(uuid "3898b072-be26-4688-ae05-cbf30a3a8a1e")
-	)
-	(wire
-		(pts
-			(xy 218.44 49.53) (xy 224.79 49.53)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "399121a5-ce3a-487c-9d64-4ee6b1863753")
 	)
 	(wire
 		(pts
@@ -5804,7 +5794,7 @@
 	)
 	(wire
 		(pts
-			(xy 224.79 49.53) (xy 224.79 77.47)
+			(xy 218.44 45.72) (xy 218.44 77.47)
 		)
 		(stroke
 			(width 0)
@@ -5941,16 +5931,6 @@
 			(type default)
 		)
 		(uuid "bbc91132-b89d-4e11-9e6f-41f22a040995")
-	)
-	(wire
-		(pts
-			(xy 218.44 45.72) (xy 218.44 49.53)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bd6fd5f7-ff05-49a6-b0f6-24440fac9e83")
 	)
 	(wire
 		(pts
@@ -6441,6 +6421,16 @@
 			)
 		)
 		(uuid "510d6c93-4905-4970-b6e5-a5d817d5d04b")
+	)
+	(text "Audio anti-aliasing"
+		(exclude_from_sim no)
+		(at 234.442 21.082 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "854b6905-9932-49d6-b86b-84c9c3ed8548")
 	)
 	(text "I2C level shifter"
 		(exclude_from_sim no)
