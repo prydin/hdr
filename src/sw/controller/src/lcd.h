@@ -52,9 +52,10 @@ typedef struct LCD_s {
     u8 display_control;
     u8 display_function;
     u8 backlight;    
+    u8 num_lines;
 } LCD;
 
-void lcd_init(LCD* lcd, XIic* iic, u8 address, u8 backlight);
+void lcd_init(LCD *lcd, XIic *iic, u8 address, u8 num_lines, u8 backlight);
 
 void LDC_shutdown(LCD* lcd);
 
