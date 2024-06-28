@@ -40,6 +40,20 @@ void set_phase_inc(u32 phase_inc) {
     
 }
 
+#define ATOI_BUFSIZE 12
+char *itoa(int i) {
+    static char buffer[ATOI_BUFSIZE];
+    if(i == 0) {
+        return "0";
+    }
+    buffer[ATOI_BUFSIZE - 1] = 0;
+    int p = ATOI_BUFSIZE - 2;
+    for(; i && p >= 0; i /= 10) {
+        buffer[p--] = '0' + i % 10;
+    }  
+    return buffer + p + 1;
+}
+
 int main()
 {
     init_platform();
@@ -48,13 +62,25 @@ int main()
 
     // Let everything start up settle before we kick off the local oscillator
     //usleep(1000);
+    xil_printf("%s\n\r", itoa(42));
     set_phase_inc(fq_to_phase_inc(fq));
 
     LCD lcd;
-    LCD_init(&lcd, get_iic(), 0x27, 1);
+    lcd_init(&lcd, get_iic(), 0x27, 1);
+    lcd_blink_on(&lcd);
+
+    int i = 0;
     for(;;) {
-        print_string(&lcd, "Hello world!");
-    }
+        lcd_home(&lcd);
+        lcd_print_string(&lcd, "Hello world! ");
+        lcd_print_string(&lcd, itoa(i));
+         xil_printf("%s\n\r", itoa(i));
+        usleep(100000);
+        ++i;
+    }        
+
+
+
     /*
     if(XIic_SelfTest(lcd.iic) != XST_SUCCESS) {
         xil_printf("IIC self test failed\n\r");

@@ -296,6 +296,24 @@
                 "SV": "xilinx.com:ip:axi_intc:4.1",
                 "TM": "data",
                 "TU": "register"
+            },
+            "V9": {
+                "VT": "AC",
+                "BA": "0x41C00000",
+                "HA": "0x41C0FFFF",
+                "BP": "C_BASEADDR",
+                "HP": "C_HIGHADDR",
+                "MA": "Data",
+                "MX": "/microblaze_0",
+                "MI": "M_AXI_DP",
+                "MS": "SEG_axi_timer_0_Reg",
+                "MV": "xilinx.com:ip:microblaze:11.0",
+                "SX": "/axi_timer_0",
+                "SI": "S_AXI",
+                "SS": "Reg",
+                "SV": "xilinx.com:ip:axi_timer:2.0",
+                "TM": "data",
+                "TU": "register"
             }
         },
         "edges": [
@@ -334,6 +352,11 @@
             },
             {
                 "src": "V8",
+                "trg": "V2",
+                "EH": "2"
+            },
+            {
+                "src": "V9",
                 "trg": "V2",
                 "EH": "2"
             }

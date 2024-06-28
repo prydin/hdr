@@ -54,20 +54,34 @@ typedef struct LCD_s {
     u8 backlight;    
 } LCD;
 
-void LCD_init(LCD* lcd, XIic* iic, u8 address, u8 backlight);
+void lcd_init(LCD* lcd, XIic* iic, u8 address, u8 backlight);
 
 void LDC_shutdown(LCD* lcd);
 
 int LCD_send_single(LCD* lcd, u8 value);
 
-void set_backlight(LCD* lcd, u8 backlight);
+void lcd_set_backlight(LCD* lcd, u8 backlight);
 
 int LCD_send_single(LCD* lcd, u8 value);
 
-void display_off(LCD* lcd);
+void lcd_display_off(LCD* lcd);
 
-void display_on(LCD* lcd);
+void lcd_display_on(LCD* lcd);
 
-void print_char(LCD *lcd, char ch);
+void lcd_print_char(LCD *lcd, char ch);
 
-void print_string(LCD *lcd, char *s);
+void lcd_print_string(LCD *lcd, char *s);
+
+void lcd_clear(LCD *lcd);
+
+void lcd_home(LCD *lcd);
+
+void lcd_cursor_off(LCD *lcd);
+
+void lcd_cursor_on(LCD* lcd);
+
+void lcd_blink_off(LCD *lcd);
+
+void lcd_blink_on(LCD* lcd);
+
+void lcd_set_cursor(LCD *lcd, u8 col, u8 row);
