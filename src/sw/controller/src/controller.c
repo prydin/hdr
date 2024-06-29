@@ -76,45 +76,7 @@ int main() {
 
   LCD lcd;
   lcd_init(&lcd, get_iic(), 0x27, 4, 1);
-  lcd_blink_on(&lcd);
 
-  int i = 0;
-  for (;;) {
-    lcd_home(&lcd);
-    lcd_print_string(&lcd, "Hello world! ");
-    lcd_set_cursor(&lcd, 0, 2);
-    print_fq(&lcd, i + 1001000);
-
-    //  xil_printf("%s\n\r", itoa(i, 1));
-    usleep(100000);
-    ++i;
-  }
-
-  /*
-  if(XIic_SelfTest(lcd.iic) != XST_SUCCESS) {
-      xil_printf("IIC self test failed\n\r");
-      return XST_FAILURE;
-  } */
-
-  /*
-
-
-  for(;;) {
-      //xil_printf("Sending character\n\r");
-      int status = LCD_send_single(&lcd, 0xaa);
-      XIicStats stats;
-      XIic_GetStats(lcd.iic,  &stats);
-
-      xil_printf("arb lost=%d, txerr:%d, sentbytes: %d, bus busy: %d\n\r",
-stats.ArbitrationLost, stats.TxErrors, stats.SendBytes, stats.BusBusy);
-//        usleep(100000);
-//      	while (XIic_IsIicBusy(lcd.iic)){}
-      LCD_send_single(&lcd, 0x55);
-      // xil_printf("Character sent\n\r");
-//      usleep(100000);
-      // XIic_Reset(lcd.iic);
-//      while (XIic_IsIicBusy(lcd.iic)){}
-    }  */
   for (;;) {
     s8 fq_inc = get_fq_increment();
     if (fq > 0 && fq < MAX_FQ) {
@@ -124,6 +86,8 @@ stats.ArbitrationLost, stats.TxErrors, stats.SendBytes, stats.BusBusy);
       u32 phase_inc = fq_to_phase_inc(fq);
       set_phase_inc(phase_inc);
       xil_printf("Fq: %d, pi: %d\n\r", fq, phase_inc);
+      lcd_set_cursor(&lcd, 0, 0);
+      print_fq(&lcd, fq);
     }
   }
 

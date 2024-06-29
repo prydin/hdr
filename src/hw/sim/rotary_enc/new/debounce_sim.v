@@ -63,7 +63,7 @@ module debounce_sim();
     end
     
     debounce #(
-    .CYCLES(1000)
+    .CYCLES(800)
     ) deb (
         .aclk(clk), 
         .reset(reset),

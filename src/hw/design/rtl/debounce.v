@@ -1,11 +1,43 @@
 `timescale 1ns / 1ps
 
+module edge_detect(
+    input wire aclk,
+    input wire reset,
+    input wire signal,
+    output reg pos,
+    output reg neg
+    );
+    
+    reg [1:0] shift = 2'b00;
+    always @(posedge aclk or posedge reset) 
+    begin
+        if(reset) 
+        begin
+            shift <= { signal, signal };
+        end else begin 
+            shift <= { shift, signal };
+            if(shift == 2'b01) 
+            begin
+                pos <= 1'b1;
+                neg <= 1'b0;
+            end else if(shift == 2'b10) 
+            begin
+                pos <= 1'b0;
+                neg <= 1'b1;
+            end else begin
+                pos <= 1'b0;
+                neg <= 1'b0;
+            end
+        end
+    end
+endmodule
+            
+
 // Debounce an input by requiring the set ratio of samples to be equal to the new state
 // within a specified number of clock ticks.
 module debounce 
     #(
-    parameter CYCLES = 16_000,
-    parameter GOOD_RATIO_LOG2 = 4 // Need 15/16 good samples
+    parameter CYCLES = 160_000    // 10ms
     ) 
     (
     input wire aclk,    // System clock
@@ -14,54 +46,38 @@ module debounce
     output reg out      // Debounced signal
     );
     
-    reg prev = 0;
-    reg wanted = 0;
-    localparam NEEDED_CYCLES = CYCLES - (CYCLES >>> GOOD_RATIO_LOG2); // "Good" cycles needed for transition
-    reg [0:$clog2(CYCLES + 1) - 1] good_cycles = 0;
-    reg [0:$clog2(CYCLES + 1) - 1] total_cycles = CYCLES;
-    reg edge_found = 0;
+    wire pos;
+    wire neg;
+    edge_detect edge_detect(
+        .aclk(aclk),
+        .reset(reset),
+        .signal(in),
+        .pos(pos),
+        .neg(neg)); 
     
+    reg [0:$clog2(CYCLES + 1) - 1] counter = 0;
+      
+    // Look for a state that lasts for at least CYCLES cycles. 
     always @(posedge aclk or posedge reset) 
     begin
         if(reset) 
         begin
-            out <= 0;
-            prev <= 0;
-            edge_found <= 0;
-            good_cycles <= 0;
-            total_cycles <= CYCLES;
-            wanted <= 0;
+            out <= in;
+            counter <= CYCLES;
         end else begin
-            // Are we at the first edge of a transistion?
-            if(!edge_found && in != prev) 
+            // Switch changed, reset counter
+            if(pos | neg)
             begin
-                wanted <= in;
-                edge_found <= 1;
-            end else if(edge_found) 
-            begin
-                // Count "good" cycles, i.e. when the input is the wanted value
-                if(in == wanted) 
+                counter <= CYCLES;
+            end else begin
+                counter <= counter - 1;
+                if(counter == 0) 
                 begin
-                    good_cycles <= good_cycles + 1;
+                    // We found a stable state
+                    out <= in;
+                    counter <= CYCLES;
                 end
-                
-                // Did we finish the entire sampling window? 
-                if(total_cycles == 0)
-                begin
-                    // If we got enough good samples, we deem the transition valid
-                    if(good_cycles >= NEEDED_CYCLES)
-                    begin
-                        out <= wanted;
-                    end
-                    
-                    // Reset everything for the next transition
-                    edge_found <= 0;
-                    total_cycles <= CYCLES;
-                    good_cycles <= 0;
-                end
-                total_cycles <= total_cycles - 1;
             end
-            prev <= in;
-        end
+    end
    end
 endmodule

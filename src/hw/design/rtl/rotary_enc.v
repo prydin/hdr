@@ -3,7 +3,7 @@
 // Quadrature rotary encoder handler. Accumulates the number of detents moved
 // in a register. 1 is a clockwise step and -1 is counter-clockwise.
 module rotary_enc #(
-    parameter CYCLES = 16000        // Debounce cycles
+    parameter CYCLES = 160000        // Debounce cycles
     ) (
     input wire aclk,                // Clock
     input wire reset,               // Master reset

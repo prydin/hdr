@@ -1374,7 +1374,7 @@
       "file": {
         "name": "..\\..\\..\\..\\src\\sw\\controller\\build\\controller.elf",
         "type": "ELF",
-        "checksum": "968418189",
+        "checksum": "1370115769",
         "IsVisible": "1",
         "ScopedToRef": "mcu",
         "ScopedToCell": [
@@ -1387,7 +1387,7 @@
       "file": {
         "name": "..\\..\\..\\..\\src\\sw\\controller\\build\\controller.elf",
         "type": "ELF",
-        "checksum": "968418189",
+        "checksum": "1370115769",
         "IsVisible": "1",
         "ScopedToRef": "mcu",
         "ScopedToCell": [
